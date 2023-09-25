@@ -7,15 +7,14 @@ const App = () => {
   const [posts, setPosts] = useState(dummyData);
 
   const likePost = (postId) => {
-    const updatedPosts = posts.map((post) => {
-      if (post.id === postId) {
-        return { ...post, likes: post.likes + 1 };
-      }
-      return post;
-    });
-    setPosts(updatedPosts);
+    setPosts(
+      posts.map((post) => {
+        if (post.id !== postId) return post;
+        let updatedPost = { ...post, likes: post.likes + 1 };
+        return updatedPost;
+      })
+    );
   };
-
   return (
     <div className="App">
       <SearchBar />
